@@ -1,153 +1,234 @@
-:root {
-  --blue: #1f4f99;
-  --dark: #10233f;
-  --light: #f5f8ff;
-  --card: #ffffff;
-  --line: #d9e2f2;
-  --muted: #65758b;
-  --green: #147a46;
-  --orange: #a75800;
-  --red: #b42318;
+* {
+  box-sizing: border-box;
 }
-
-* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(180deg, #dcebff, #f7f9fd);
-  color: var(--dark);
+  background: #eaf3ff;
+  color: #0b1f3f;
 }
 
 .app {
-  max-width: 900px;
+  max-width: 760px;
   margin: 0 auto;
   padding: 18px;
 }
 
 .hero {
-  background: linear-gradient(135deg, #1f4f99, #5b8def);
+  background: linear-gradient(135deg, #0b1f3f, #1f5f99);
   color: white;
-  border-radius: 24px;
   padding: 24px;
-  box-shadow: 0 12px 35px rgba(31,79,153,.25);
+  border-radius: 22px;
+  margin-bottom: 18px;
 }
 
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  font-size: .76rem;
-  opacity: .85;
+.hero h1 {
   margin: 0 0 8px;
+  font-size: 30px;
+  line-height: 1.1;
 }
 
-h1, h2, p { margin-top: 0; }
-
-.subhead { margin-bottom: 0; line-height: 1.45; }
+.hero p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: 0.95;
+}
 
 .panel {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 20px;
+  background: white;
+  border-radius: 18px;
   padding: 18px;
-  margin-top: 16px;
-  box-shadow: 0 8px 24px rgba(16,35,63,.07);
+  margin-bottom: 18px;
+  box-shadow: 0 8px 24px rgba(11, 31, 63, 0.08);
 }
 
-.controls, .dining-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+.panel h2 {
+  margin: 0 0 14px;
+  font-size: 24px;
+  color: #0b1f3f;
 }
 
-.dining-grid { grid-template-columns: 1fr 1fr; }
+.filter-row {
+  margin-bottom: 14px;
+}
 
-.field label, label {
+label {
   display: block;
   font-weight: 700;
   margin-bottom: 6px;
+  color: #0b1f3f;
 }
 
-select, button, textarea {
+select,
+button,
+input,
+textarea {
   width: 100%;
-  font: inherit;
-  border-radius: 14px;
-  border: 1px solid var(--line);
-  padding: 12px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid #cbd8ea;
+}
+
+select,
+input,
+textarea {
+  padding: 13px;
+  background: white;
+  color: #0b1f3f;
+  margin-bottom: 12px;
 }
 
 button {
-  background: var(--blue);
+  padding: 13px 16px;
+  background: #0b1f3f;
   color: white;
   border: none;
   font-weight: 700;
-  margin-top: 10px;
+  cursor: pointer;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
-.small-btn {
-  width: auto;
-  padding: 9px 12px;
-  margin: 0;
+button:hover {
+  background: #163b70;
 }
 
-.danger { background: var(--red); }
-
-.section-title {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: center;
+button:active {
+  transform: scale(0.98);
 }
 
-.details {
+.filter-section {
   margin-top: 12px;
-  padding: 12px;
-  background: var(--light);
+  border: 1px solid #d9e2ef;
   border-radius: 14px;
-  line-height: 1.45;
+  overflow: hidden;
+  background: white;
 }
 
-.badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
-
-.badge {
-  display: inline-block;
-  padding: 5px 8px;
-  border-radius: 999px;
-  font-size: .78rem;
-  font-weight: 700;
-  background: #edf3ff;
-  color: var(--blue);
-}
-
-.badge.green { background: #e9f8ef; color: var(--green); }
-.badge.orange { background: #fff3e2; color: var(--orange); }
-.badge.gray { background: #eef1f5; color: #475569; }
-
-.cards, .plan-list { display: grid; gap: 10px; }
-
-.card, .plan-item {
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 14px;
-  background: #fff;
-}
-
-.card h3, .plan-item h3 { margin: 0 0 6px; }
-
-.meta, .tip { color: var(--muted); line-height: 1.4; }
-
-.score {
+.filter-section summary {
+  cursor: pointer;
+  padding: 16px;
+  font-size: 19px;
   font-weight: 800;
-  color: var(--green);
+  background: #f5f8fc;
+  color: #0b1f3f;
+  list-style: none;
 }
 
-textarea {
-  min-height: 110px;
-  resize: vertical;
+.filter-section summary::-webkit-details-marker {
+  display: none;
 }
 
-@media (max-width: 720px) {
-  .controls, .dining-grid { grid-template-columns: 1fr; }
-  .section-title { align-items: stretch; flex-direction: column; }
-  .small-btn { width: 100%; }
+.filter-section summary::after {
+  content: "▼";
+  float: right;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.filter-section[open] summary::after {
+  content: "▲";
+}
+
+.filter-section > div {
+  padding: 14px;
+}
+
+.attraction-card,
+.planned-ride {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.attraction-card h3,
+.planned-ride h3 {
+  margin: 0 0 4px;
+  font-size: 21px;
+  line-height: 1.2;
+  color: #0b1f3f;
+}
+
+.attraction-card p,
+.planned-ride p {
+  margin: 6px 0;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.labels {
+  font-size: 16px;
+  font-weight: 600;
+  color: #102a4c;
+}
+
+.empty {
+  color: #5c6f8a;
+  font-style: italic;
+  margin: 8px 0;
+}
+
+#ridePicker h2,
+#diningPlanner h2,
+#recommendedRideOrder h2 {
+  margin-top: 0;
+}
+
+#ridePicker select,
+#diningPlanner select,
+.planned-ride select {
+  margin-top: 6px;
+}
+
+.planned-ride button {
+  background: #8b1e1e;
+}
+
+.planned-ride button:hover {
+  background: #a62828;
+}
+
+@media screen and (max-width: 600px) {
+  .app {
+    padding: 12px;
+  }
+
+  .hero {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  .panel {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .panel h2 {
+    font-size: 22px;
+  }
+
+  .filter-section summary {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .attraction-card h3,
+  .planned-ride h3 {
+    font-size: 20px;
+  }
+
+  select,
+  button,
+  input,
+  textarea {
+    font-size: 16px;
+  }
 }
