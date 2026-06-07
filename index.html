@@ -1,99 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#1f4f99" />
-  <title>Disneyland Hopper Planner</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Disneyland Park Hopper Planner</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+
+<meta name="theme-color" content="#0b1f3f">
 </head>
+
 <body>
-  <main class="app">
-    <header class="hero">
-      <p class="eyebrow">Park Hopper + Lightning Lane</p>
-      <h1>Disneyland Hopper Planner</h1>
-      <p class="subhead">Pick the best rides by time of day, see Single Rider and Lightning Lane notes, and plan lunch and dinner.</p>
-    </header>
 
-    <section class="panel controls">
-      <div class="field">
-        <label for="timeOfDay">When are you riding?</label>
-        <select id="timeOfDay">
-          <option value="ropeDrop">Rope drop / first 90 minutes</option>
-          <option value="lateMorning">Late morning</option>
-          <option value="afternoon">Afternoon</option>
-          <option value="evening">Evening</option>
-          <option value="night">Last 2 hours / nighttime</option>
-        </select>
-      </div>
+<div class="app">
 
-      <div class="field">
-        <label for="parkFilter">Park</label>
-        <select id="parkFilter">
-          <option value="all">Both parks</option>
-          <option value="Disneyland Park">Disneyland Park</option>
-          <option value="Disney California Adventure">California Adventure</option>
-        </select>
-      </div>
+<header class="hero">
+  <h1>Disneyland Park Hopper Planner</h1>
+  <p>
+    Build your perfect Disneyland and California Adventure day with
+    Lightning Lane, Single Rider, dining, and ride planning.
+  </p>
+</header>
 
-      <div class="field">
-        <label for="strategyFilter">Strategy</label>
-        <select id="strategyFilter">
-          <option value="all">Show all rides</option>
-          <option value="best">Best choices now</option>
-          <option value="singleRider">Single Rider available</option>
-          <option value="llMulti">Lightning Lane Multi Pass</option>
-          <option value="llSingle">Lightning Lane Single Pass</option>
-          <option value="standby">Standby only</option>
-        </select>
-      </div>
-    </section>
+<!-- Attraction Filters -->
 
-    <section class="panel recommendation">
-      <h2>Best move right now</h2>
-      <div id="bestMove"></div>
-    </section>
+<section class="panel">
+  <h2>Attraction Filters</h2>
 
-    <section class="panel">
-      <div class="section-title">
-        <h2>Ride picker</h2>
-        <button id="addTopRide" class="small-btn">Add best ride</button>
-      </div>
-      <select id="rideSelect"></select>
-      <button id="addRide">Add selected ride</button>
-      <div id="rideDetails" class="details"></div>
-    </section>
+  <div class="filter-row">
+    <label for="parkFilter">Park</label>
 
-    <section class="panel">
-      <h2>Recommended ride order</h2>
-      <div id="rideCards" class="cards"></div>
-    </section>
+    <select id="parkFilter">
+      <option value="all">All Parks</option>
+      <option value="Disneyland">Disneyland</option>
+      <option value="California Adventure">California Adventure</option>
+    </select>
+  </div>
 
-    <section class="panel">
-      <h2>My ride plan</h2>
-      <div id="planList" class="plan-list"></div>
-      <button id="clearPlan" class="danger">Clear ride plan</button>
-    </section>
+  <div id="attractionFilters"></div>
+</section>
 
-    <section class="panel dining-grid">
-      <div>
-        <h2>Lunch</h2>
-        <select id="lunchSelect"></select>
-        <div id="lunchDetails" class="details"></div>
-      </div>
-      <div>
-        <h2>Dinner</h2>
-        <select id="dinnerSelect"></select>
-        <div id="dinnerDetails" class="details"></div>
-      </div>
-    </section>
+<!-- Ride Picker -->
 
-    <section class="panel notes">
-      <h2>Day notes</h2>
-      <textarea id="dayNotes" placeholder="Example: Book first LL immediately after scanning in. Use Single Rider for Space Mountain if the posted wait spikes."></textarea>
-    </section>
-  </main>
-  <script src="script.js"></script>
+<section class="panel">
+  <div id="ridePicker"></div>
+</section>
+
+<!-- Dining Planner -->
+
+<section class="panel">
+  <div id="diningPlanner"></div>
+</section>
+
+<!-- Recommended Ride Order -->
+
+<section class="panel">
+  <div id="recommendedRideOrder"></div>
+</section>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
