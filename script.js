@@ -1,366 +1,394 @@
-const STORAGE_KEY = "disneylandPlannerRideOrderV4";
-const NOTES_KEY = "disneylandPlannerNotesV4";
-const DINING_KEY = "disneylandPlannerDiningV4";
-
-const METHOD = {
-  MULTI: "Lightning Lane Multi Pass",
-  SINGLE_PASS: "Lightning Lane Single Pass",
-  SINGLE_RIDER: "Single Rider",
-  STANDBY: "Standby",
-  SHOW: "Show"
-};
-
-const icons = {
-  [METHOD.MULTI]: "⭐",
-  [METHOD.SINGLE_PASS]: "⚡",
-  [METHOD.SINGLE_RIDER]: "👤",
-  [METHOD.STANDBY]: "⏳",
-  [METHOD.SHOW]: "🎭"
-};
-
 const attractions = [
-  { name: "Indiana Jones Adventure", park: "Disneyland", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "Space Mountain", park: "Disneyland", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "Big Thunder Mountain Railroad", park: "Disneyland", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "Matterhorn Bobsleds", park: "Disneyland", options: [METHOD.MULTI, METHOD.SINGLE_RIDER, METHOD.STANDBY] },
-  { name: "Star Wars: Rise of the Resistance", park: "Disneyland", options: [METHOD.SINGLE_PASS, METHOD.STANDBY] },
-  { name: "Millennium Falcon: Smugglers Run", park: "Disneyland", options: [METHOD.MULTI, METHOD.SINGLE_RIDER, METHOD.STANDBY] },
-  { name: "Mickey & Minnie’s Runaway Railway", park: "Disneyland", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "Tiana’s Bayou Adventure", park: "Disneyland", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "Haunted Mansion", park: "Disneyland", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "Star Tours", park: "Disneyland", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "Buzz Lightyear Astro Blasters", park: "Disneyland", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "Pirates of the Caribbean", park: "Disneyland", options: [METHOD.STANDBY] },
-  { name: "Jungle Cruise", park: "Disneyland", options: [METHOD.STANDBY] },
-  { name: "Peter Pan’s Flight", park: "Disneyland", options: [METHOD.STANDBY] },
-  { name: "Alice in Wonderland", park: "Disneyland", options: [METHOD.STANDBY] },
-  { name: "Enchanted Tiki Room", park: "Disneyland", options: [METHOD.SHOW] },
-  { name: "Fantasmic!", park: "Disneyland", options: [METHOD.SHOW] },
-  { name: "Fireworks", park: "Disneyland", options: [METHOD.SHOW] },
-  { name: "Great Moments with Mr. Lincoln", park: "Disneyland", options: [METHOD.SHOW] },
-
-  { name: "Radiator Springs Racers", park: "California Adventure", options: [METHOD.SINGLE_PASS, METHOD.SINGLE_RIDER, METHOD.STANDBY] },
-  { name: "Guardians of the Galaxy: Mission BREAKOUT!", park: "California Adventure", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "WEB SLINGERS: A Spider-Man Adventure", park: "California Adventure", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "Incredicoaster", park: "California Adventure", options: [METHOD.MULTI, METHOD.SINGLE_RIDER, METHOD.STANDBY] },
-  { name: "Toy Story Midway Mania!", park: "California Adventure", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "Soarin’ Around the World", park: "California Adventure", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "Grizzly River Run", park: "California Adventure", options: [METHOD.MULTI, METHOD.SINGLE_RIDER, METHOD.STANDBY] },
-  { name: "Goofy’s Sky School", park: "California Adventure", options: [METHOD.MULTI, METHOD.SINGLE_RIDER, METHOD.STANDBY] },
-  { name: "Monsters, Inc. Mike & Sulley to the Rescue!", park: "California Adventure", options: [METHOD.MULTI, METHOD.STANDBY] },
-  { name: "The Little Mermaid", park: "California Adventure", options: [METHOD.STANDBY] },
-  { name: "Pixar Pal-A-Round", park: "California Adventure", options: [METHOD.STANDBY] },
-  { name: "World of Color", park: "California Adventure", options: [METHOD.SHOW] },
-  { name: "Disney Jr. Dance Party!", park: "California Adventure", options: [METHOD.SHOW] },
-  { name: "Turtle Talk with Crush", park: "California Adventure", options: [METHOD.SHOW] }
+  {
+    name: "Indiana Jones Adventure",
+    park: "Disneyland",
+    multiPass: true,
+    singlePass: false,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Star Wars: Rise of the Resistance",
+    park: "Disneyland",
+    multiPass: false,
+    singlePass: true,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Space Mountain",
+    park: "Disneyland",
+    multiPass: true,
+    singlePass: false,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Big Thunder Mountain Railroad",
+    park: "Disneyland",
+    multiPass: true,
+    singlePass: false,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Matterhorn Bobsleds",
+    park: "Disneyland",
+    multiPass: true,
+    singlePass: false,
+    singleRider: true,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Millennium Falcon: Smugglers Run",
+    park: "Disneyland",
+    multiPass: true,
+    singlePass: false,
+    singleRider: true,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Tiana’s Bayou Adventure",
+    park: "Disneyland",
+    multiPass: true,
+    singlePass: false,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Mickey & Minnie’s Runaway Railway",
+    park: "Disneyland",
+    multiPass: true,
+    singlePass: false,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Pirates of the Caribbean",
+    park: "Disneyland",
+    multiPass: false,
+    singlePass: false,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Haunted Mansion",
+    park: "Disneyland",
+    multiPass: true,
+    singlePass: false,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Guardians of the Galaxy: Mission BREAKOUT!",
+    park: "California Adventure",
+    multiPass: true,
+    singlePass: false,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "WEB SLINGERS: A Spider-Man Adventure",
+    park: "California Adventure",
+    multiPass: true,
+    singlePass: false,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Incredicoaster",
+    park: "California Adventure",
+    multiPass: true,
+    singlePass: false,
+    singleRider: true,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Radiator Springs Racers",
+    park: "California Adventure",
+    multiPass: false,
+    singlePass: true,
+    singleRider: true,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Toy Story Midway Mania!",
+    park: "California Adventure",
+    multiPass: true,
+    singlePass: false,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Soarin’ Around the World",
+    park: "California Adventure",
+    multiPass: true,
+    singlePass: false,
+    singleRider: false,
+    standby: true,
+    show: false
+  },
+  {
+    name: "Goofy’s Sky School",
+    park: "California Adventure",
+    multiPass: true,
+    singlePass: false,
+    singleRider: true,
+    standby: true,
+    show: false
+  },
+  {
+    name: "World of Color",
+    park: "California Adventure",
+    multiPass: false,
+    singlePass: false,
+    singleRider: false,
+    standby: false,
+    show: true
+  },
+  {
+    name: "Fantasmic!",
+    park: "Disneyland",
+    multiPass: false,
+    singlePass: false,
+    singleRider: false,
+    standby: false,
+    show: true
+  }
 ];
 
-const restaurants = [
-  "Blue Bayou",
-  "Cafe Orleans",
-  "Plaza Inn",
-  "Bengal Barbecue",
-  "Docking Bay 7 Food and Cargo",
-  "Rancho del Zocalo",
-  "Alien Pizza Planet",
-  "Carnation Cafe",
-  "Lamplight Lounge",
-  "Carthay Circle",
-  "Wine Country Trattoria",
-  "Flo’s V8 Cafe",
-  "Pym Test Kitchen",
-  "Cocina Cucamonga",
-  "Smokejumpers Grill",
-  "Naples Ristorante",
-  "Black Tap",
-  "Jazz Kitchen",
-  "Ballast Point",
-  "Earl of Sandwich"
-];
-
-let rideOrder = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-let parkFilter = "Both Parks";
+let selectedRides = [];
+let diningPlans = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-  buildApp();
   renderAttractionFilters();
   renderRidePicker();
-  renderDining();
-  renderRideOrder();
+  renderDiningPlanner();
+  renderRecommendedRideOrder();
 });
 
-function buildApp() {
-  document.body.innerHTML = `
-    <main class="app">
-      <header class="hero">
-        <h1>Disneyland + California Adventure Planner</h1>
-        <p>Park Hopper, Lightning Lane, Single Rider, Standby, Shows, and Dining</p>
-      </header>
+function getAccessLabels(attraction) {
+  const labels = [];
 
-      <section class="panel">
-        <h2>Notes</h2>
-        <textarea id="notes" placeholder="Rope drop plan, dining reservations, Lightning Lane reminders, mobile order notes..."></textarea>
-      </section>
+  if (attraction.multiPass) labels.push("⭐ Multi Pass");
+  if (attraction.singlePass) labels.push("💰 Single Pass");
+  if (attraction.singleRider) labels.push("👤 Single Rider");
+  if (attraction.standby) labels.push("⏳ Standby");
+  if (attraction.show) labels.push("🎭 Show");
 
-      <section class="panel">
-        <h2>Attraction Filters</h2>
-
-        <label for="parkFilter">Park Filter</label>
-        <select id="parkFilter">
-          <option>Both Parks</option>
-          <option>Disneyland Only</option>
-          <option>California Adventure Only</option>
-        </select>
-
-        <div id="filterSections"></div>
-      </section>
-
-      <section class="panel">
-        <h2>Ride / Show Picker</h2>
-        <label for="attractionSelect">Select Ride or Show</label>
-        <select id="attractionSelect"></select>
-
-        <div id="availableOptions"></div>
-      </section>
-
-      <section class="panel">
-        <h2>Dining Planner</h2>
-
-        <label for="lunchSelect">Lunch</label>
-        <select id="lunchSelect"></select>
-
-        <label for="lunchTime">Lunch Time</label>
-        <input id="lunchTime" type="text" placeholder="Example: 11:30 AM">
-
-        <label for="dinnerSelect">Dinner</label>
-        <select id="dinnerSelect"></select>
-
-        <label for="dinnerTime">Dinner Time</label>
-        <input id="dinnerTime" type="text" placeholder="Example: 6:00 PM">
-      </section>
-
-      <section class="panel">
-        <h2>Recommended Ride Order</h2>
-        <div id="rideOrder"></div>
-        <button class="danger" onclick="clearRideOrder()">Clear Ride Order</button>
-      </section>
-    </main>
-  `;
-
-  document.getElementById("parkFilter").addEventListener("change", e => {
-    parkFilter = e.target.value;
-    renderAttractionFilters();
-    renderRidePicker();
-  });
-
-  const notes = document.getElementById("notes");
-  notes.value = localStorage.getItem(NOTES_KEY) || "";
-  notes.addEventListener("input", () => {
-    localStorage.setItem(NOTES_KEY, notes.value);
-  });
+  return labels.join(" · ");
 }
 
-function getFilteredByPark() {
-  return attractions.filter(a => {
-    if (parkFilter === "Disneyland Only") return a.park === "Disneyland";
-    if (parkFilter === "California Adventure Only") return a.park === "California Adventure";
-    return true;
+function createAttractionCard(attraction) {
+  const card = document.createElement("div");
+  card.className = "attraction-card";
+
+  card.innerHTML = `
+    <h3>${attraction.name}</h3>
+    <p>${attraction.park}</p>
+    <p class="labels">${getAccessLabels(attraction)}</p>
+    <button onclick="addRide('${attraction.name}')">Add to Ride Plan</button>
+  `;
+
+  return card;
+}
+
+function renderRideList(containerId, rideList) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (rideList.length === 0) {
+    container.innerHTML = `<p class="empty">No rides in this section.</p>`;
+    return;
+  }
+
+  rideList.forEach(attraction => {
+    container.appendChild(createAttractionCard(attraction));
   });
 }
 
 function renderAttractionFilters() {
-  const container = document.getElementById("filterSections");
-  const filtered = getFilteredByPark();
+  const container = document.getElementById("attractionFilters");
+  if (!container) return;
 
-  const sections = [
-    { title: "All Attractions", list: filtered },
-    { title: "Single Rider", list: filtered.filter(a => a.options.includes(METHOD.SINGLE_RIDER)) },
-    { title: "Multi Pass Lightning Lane", list: filtered.filter(a => a.options.includes(METHOD.MULTI)) },
-    { title: "Single Pass Lightning Lane", list: filtered.filter(a => a.options.includes(METHOD.SINGLE_PASS)) },
-    { title: "Standby Only", list: filtered.filter(a => a.options.length === 1 && a.options.includes(METHOD.STANDBY)) },
-    { title: "Shows", list: filtered.filter(a => a.options.includes(METHOD.SHOW)) }
-  ];
+  container.innerHTML = `
+    <details class="filter-section" open>
+      <summary>All Attractions</summary>
+      <div id="allAttractions"></div>
+    </details>
 
-  container.innerHTML = sections.map(section => `
-    <div class="filter-group">
-      <h3>${section.title}</h3>
-      ${
-        section.list.length
-          ? section.list.map(a => `
-              <div class="attraction-card">
-                <strong>${a.name}</strong>
-                <p>${a.park}</p>
-                <p>${formatOptions(a.options)}</p>
-              </div>
-            `).join("")
-          : `<p class="empty">No attractions in this section.</p>`
-      }
-    </div>
-  `).join("");
+    <details class="filter-section">
+      <summary>Single Rider</summary>
+      <div id="singleRiderAttractions"></div>
+    </details>
+
+    <details class="filter-section">
+      <summary>Multi Pass Lightning Lane</summary>
+      <div id="multiPassAttractions"></div>
+    </details>
+
+    <details class="filter-section">
+      <summary>Single Pass Lightning Lane</summary>
+      <div id="singlePassAttractions"></div>
+    </details>
+
+    <details class="filter-section">
+      <summary>Standby Only</summary>
+      <div id="standbyAttractions"></div>
+    </details>
+
+    <details class="filter-section">
+      <summary>Shows</summary>
+      <div id="showAttractions"></div>
+    </details>
+  `;
+
+  renderRideList("allAttractions", attractions);
+  renderRideList("singleRiderAttractions", attractions.filter(a => a.singleRider));
+  renderRideList("multiPassAttractions", attractions.filter(a => a.multiPass));
+  renderRideList("singlePassAttractions", attractions.filter(a => a.singlePass));
+  renderRideList("standbyAttractions", attractions.filter(a => a.standby && !a.multiPass && !a.singlePass && !a.singleRider && !a.show));
+  renderRideList("showAttractions", attractions.filter(a => a.show));
 }
 
 function renderRidePicker() {
-  const select = document.getElementById("attractionSelect");
-  const filtered = getFilteredByPark();
+  const container = document.getElementById("ridePicker");
+  if (!container) return;
 
-  select.innerHTML = filtered.map((a, index) => `
-    <option value="${index}">${a.name} — ${a.park}</option>
-  `).join("");
-
-  select.onchange = renderAvailableOptions;
-  renderAvailableOptions();
+  container.innerHTML = `
+    <h2>Ride / Show Picker</h2>
+    <select id="rideSelect">
+      <option value="">Choose a ride or show</option>
+      ${attractions.map(a => `
+        <option value="${a.name}">
+          ${a.name} — ${a.park} — ${getAccessLabels(a)}
+        </option>
+      `).join("")}
+    </select>
+    <button onclick="addSelectedRide()">Add Ride</button>
+  `;
 }
 
-function renderAvailableOptions() {
-  const filtered = getFilteredByPark();
-  const selectedIndex = document.getElementById("attractionSelect").value;
-  const attraction = filtered[selectedIndex];
+function addSelectedRide() {
+  const select = document.getElementById("rideSelect");
+  if (!select || !select.value) return;
 
-  const container = document.getElementById("availableOptions");
+  addRide(select.value);
+  select.value = "";
+}
 
-  if (!attraction) {
-    container.innerHTML = `<p class="empty">No attraction selected.</p>`;
+function addRide(rideName) {
+  const attraction = attractions.find(a => a.name === rideName);
+  if (!attraction) return;
+
+  selectedRides.push({
+    ...attraction,
+    plannedMethod: attraction.multiPass
+      ? "Multi Pass"
+      : attraction.singlePass
+      ? "Single Pass"
+      : attraction.singleRider
+      ? "Single Rider"
+      : attraction.show
+      ? "Show"
+      : "Standby"
+  });
+
+  renderRecommendedRideOrder();
+}
+
+function removeRide(index) {
+  selectedRides.splice(index, 1);
+  renderRecommendedRideOrder();
+}
+
+function renderDiningPlanner() {
+  const container = document.getElementById("diningPlanner");
+  if (!container) return;
+
+  const restaurants = [
+    "Blue Bayou Restaurant — Disneyland",
+    "Cafe Orleans — Disneyland",
+    "Plaza Inn — Disneyland",
+    "Carnation Cafe — Disneyland",
+    "Lamplight Lounge — California Adventure",
+    "Carthay Circle Restaurant — California Adventure",
+    "Pym Test Kitchen — California Adventure",
+    "Wine Country Trattoria — California Adventure",
+    "Black Tap — Downtown Disney",
+    "Din Tai Fung — Downtown Disney"
+  ];
+
+  container.innerHTML = `
+    <h2>Dining Planner</h2>
+
+    <label>Lunch</label>
+    <select id="lunchSelect">
+      <option value="">Choose lunch</option>
+      ${restaurants.map(r => `<option value="${r}">${r}</option>`).join("")}
+    </select>
+
+    <label>Dinner</label>
+    <select id="dinnerSelect">
+      <option value="">Choose dinner</option>
+      ${restaurants.map(r => `<option value="${r}">${r}</option>`).join("")}
+    </select>
+  `;
+}
+
+function renderRecommendedRideOrder() {
+  const container = document.getElementById("recommendedRideOrder");
+  if (!container) return;
+
+  if (selectedRides.length === 0) {
+    container.innerHTML = `
+      <h2>Recommended Ride Order</h2>
+      <p class="empty">Add rides to build your plan.</p>
+    `;
     return;
   }
 
   container.innerHTML = `
-    <h3>Available Options</h3>
-    <p>${formatOptions(attraction.options)}</p>
-    <div class="button-row">
-      ${attraction.options.map(option => `
-        <button onclick="addRide('${escapeText(attraction.name)}', '${escapeText(attraction.park)}', '${escapeText(option)}')">
-          Add Using ${icons[option]} ${shortMethod(option)}
-        </button>
-      `).join("")}
-    </div>
+    <h2>Recommended Ride Order</h2>
+    ${selectedRides.map((ride, index) => `
+      <div class="planned-ride">
+        <h3>${index + 1}. ${ride.name}</h3>
+        <p>${ride.park}</p>
+        <p>${getAccessLabels(ride)}</p>
+
+        <label>Planned Method</label>
+        <select onchange="updateRideMethod(${index}, this.value)">
+          <option value="Multi Pass" ${ride.plannedMethod === "Multi Pass" ? "selected" : ""}>⭐ Multi Pass</option>
+          <option value="Single Pass" ${ride.plannedMethod === "Single Pass" ? "selected" : ""}>💰 Single Pass</option>
+          <option value="Single Rider" ${ride.plannedMethod === "Single Rider" ? "selected" : ""}>👤 Single Rider</option>
+          <option value="Standby" ${ride.plannedMethod === "Standby" ? "selected" : ""}>⏳ Standby</option>
+          <option value="Show" ${ride.plannedMethod === "Show" ? "selected" : ""}>🎭 Show</option>
+        </select>
+
+        <button onclick="removeRide(${index})">Remove</button>
+      </div>
+    `).join("")}
   `;
 }
 
-function renderDining() {
-  const saved = JSON.parse(localStorage.getItem(DINING_KEY)) || {
-    lunch: "",
-    lunchTime: "",
-    dinner: "",
-    dinnerTime: ""
-  };
-
-  const lunchSelect = document.getElementById("lunchSelect");
-  const dinnerSelect = document.getElementById("dinnerSelect");
-
-  const options = `<option value="">Select restaurant</option>` + restaurants.map(r => `
-    <option value="${r}">${r}</option>
-  `).join("");
-
-  lunchSelect.innerHTML = options;
-  dinnerSelect.innerHTML = options;
-
-  lunchSelect.value = saved.lunch;
-  dinnerSelect.value = saved.dinner;
-  document.getElementById("lunchTime").value = saved.lunchTime;
-  document.getElementById("dinnerTime").value = saved.dinnerTime;
-
-  ["lunchSelect", "lunchTime", "dinnerSelect", "dinnerTime"].forEach(id => {
-    document.getElementById(id).addEventListener("input", saveDining);
-    document.getElementById(id).addEventListener("change", saveDining);
-  });
-}
-
-function saveDining() {
-  const dining = {
-    lunch: document.getElementById("lunchSelect").value,
-    lunchTime: document.getElementById("lunchTime").value,
-    dinner: document.getElementById("dinnerSelect").value,
-    dinnerTime: document.getElementById("dinnerTime").value
-  };
-
-  localStorage.setItem(DINING_KEY, JSON.stringify(dining));
-}
-
-function addRide(name, park, method) {
-  const attraction = attractions.find(a => a.name === name && a.park === park);
-
-  rideOrder.push({
-    id: Date.now(),
-    name,
-    park,
-    method,
-    available: attraction ? attraction.options : [method]
-  });
-
-  saveRideOrder();
-  renderRideOrder();
-}
-
-function renderRideOrder() {
-  const container = document.getElementById("rideOrder");
-
-  if (!rideOrder.length) {
-    container.innerHTML = `<p class="empty">No rides or shows added yet.</p>`;
-    return;
-  }
-
-  container.innerHTML = rideOrder.map((item, index) => `
-    <div class="ride-card">
-      <div class="ride-top">
-        <strong>${index + 1}. ${icons[item.method]} ${item.name}</strong>
-      </div>
-
-      <p><strong>Park:</strong> ${item.park}</p>
-      <p><strong>Available:</strong> ${formatOptions(item.available)}</p>
-      <p><strong>Selected:</strong> ${icons[item.method]} ${item.method}</p>
-
-      <div class="button-row">
-        <button onclick="moveRide(${index}, -1)">⬆ Move Up</button>
-        <button onclick="moveRide(${index}, 1)">⬇ Move Down</button>
-        <button onclick="removeRide(${item.id})">❌ Remove</button>
-      </div>
-    </div>
-  `).join("");
-}
-
-function moveRide(index, direction) {
-  const newIndex = index + direction;
-
-  if (newIndex < 0 || newIndex >= rideOrder.length) return;
-
-  const item = rideOrder.splice(index, 1)[0];
-  rideOrder.splice(newIndex, 0, item);
-
-  saveRideOrder();
-  renderRideOrder();
-}
-
-function removeRide(id) {
-  rideOrder = rideOrder.filter(item => item.id !== id);
-  saveRideOrder();
-  renderRideOrder();
-}
-
-function clearRideOrder() {
-  if (!confirm("Clear your full recommended ride order?")) return;
-
-  rideOrder = [];
-  saveRideOrder();
-  renderRideOrder();
-}
-
-function saveRideOrder() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(rideOrder));
-}
-
-function formatOptions(options) {
-  return options.map(option => `${icons[option]} ${shortMethod(option)}`).join(" · ");
-}
-
-function shortMethod(method) {
-  if (method === METHOD.MULTI) return "Multi Pass";
-  if (method === METHOD.SINGLE_PASS) return "Single Pass";
-  if (method === METHOD.SINGLE_RIDER) return "Single Rider";
-  if (method === METHOD.STANDBY) return "Standby";
-  if (method === METHOD.SHOW) return "Show";
-  return method;
-}
-
-function escapeText(text) {
-  return String(text).replace(/'/g, "\\'");
+function updateRideMethod(index, method) {
+  selectedRides[index].plannedMethod = method;
+  renderRecommendedRideOrder();
 }
